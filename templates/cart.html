@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link href="{% static "style/style.css" %}" rel="stylesheet">
+</head>
+<body style="background-color: darkslategrey">
+<header>
+    <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li>
+            <a href='/restaurant/'>Home</a>
+        </li>
+        <li>
+            <a href='/browse/'>Browse</a>
+        </li>
+          {% if request.user.is_authenticated %}
+              <li class="active">
+                  <a href='/cart/'>Cart</a>
+              </li>
+          {% endif %}
+                <li>
+                  <a href='/about/'>About Us</a>
+              </li>
+            <li>
+           <form method="post" action='/srch/' style="padding: 11px">
+                {% csrf_token %}
+                <input type="text" name="text1" placeholder="Search..." style="width: 220px">
+                <button type="submit"><i class="fa fa-search"></i></button>
+	    </form>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+        <li><a href='/log/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          {% else %}
+          <li><a href='/login/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+            <li><a href='/register/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+          {% endif  %}
+      </ul>
+    </div>
+</div>
+<h1 style="text-align: center; color: white">My Cart</h1>
+</header>
+<div class="container">
+    <div class="row col-md-12" style="background-color: lightgray">
+        <div id="checkout">
+            <a type="button" href="/check/" class="btn btn-ge style-4 btn-warning btn-sm" id="buy_button">Buy Now</a>
+        </div>
+        <table class="table" style="background-color: ghostwhite" id="cart_table">
+            <thead>
+                <tr>
+                    <td style="font-weight: bold;">Emri</td>
+                    <td style="font-weight: bold;">Sasia</td>
+                    <td style="width:120px; font-weight: bold;">Cmimi</td>
+                    <td style="width:40px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in purchuase %}
+                <tr>
+                    <td>{{ a.id_product.emri }}</td>
+                    <td>{{ a.quantity }}</td>
+                    <td>{{ a.cmimi_total }}</td>
+                    <td><a href="/delete/?id={{ a.id }}"></a> <span class="glyphicon glyphicon-trash" style="color: #f80808;"></span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p id="totali" style="font-weight: bold">Totali: {{ shuma }} LEK</p>
+    </div>
+</div>
+<footer style="margin-top: 230px">
+    <div class="container">
+        <div class="col-md-3 col-sm-12" style="padding-left: 10px">
+            <h4>Contact</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-map-marker"></i>Rruga: Siri Kodra, Qytet Studenti,Tirane
+                </li>
+                <li>
+                    <a href="tel:+355694812891"><i class="fa fa-phone"></i>+355694812891</a>
+                </li>
+                <li>
+                    <a href="https://mail.google.com/mail/u/0/#inbox"><i class="fa fa-envelope"></i>parisszarka@gmail.com</a>
+                </li>
+                <li>
+                    <i class="fa fa-clock-o"></i>E hene - E diele, 09:00-21:00
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <h4>About</h4>
+            <a href="About.html">About Us</a>
+            <h4>Try our services</h4>
+            <a href="register.html">Register</a><br>
+            <a href="login.html">Login</a>
+
+        </div>
+        <div class="col-md-6 col-sm-12" style="text-align: center">
+            <div id="word_spaces">
+                <p>
+                    <a href="https://www.facebook.com/">
+                    <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                    <a href="https://twitter.com/">
+                    <i class="fab fa-twitter-square fa-2x"></i>
+                    </a>
+                    <a href="https://plus.google.com/">
+                    <i class="fab fa-google-plus-square fa-2x"></i>
+                    </a>
+                    <a href="https://www.skype.com/en/">
+                    <i class="fab fa-skype fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+                <br>
+                <p>By using our site you agree to our Terms of Use. Read owr Privacy Policy. &copy;2019 Porositi.com, LLC. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

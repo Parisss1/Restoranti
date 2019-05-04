@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link href="{% static "style/style.css" %}" rel="stylesheet">
+    <style>
+.navbar {
+    position: relative;
+    margin-bottom: 0px;
+ }
+</style>
+</head>
+<body style="background-color: darkslategrey">
+<header>
+    <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li>
+            <a href='/restaurant/'>Home</a>
+        </li>
+        <li>
+            <a href='/browse/'>Browse</a>
+        </li>
+          {% if request.user.is_authenticated %}
+              <li>
+                  <a href='/cart/'>Cart</a>
+              </li>
+          {% endif %}
+                <li class="active">
+                  <a href='/about/'>About Us</a>
+              </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+        <li><a href='/log/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          {% else %}
+          <li><a href='/login/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+            <li><a href='/register/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+          {% endif  %}
+      </ul>
+    </div>
+</div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="{% static "images/carouselfoto.jpg" %}" alt="Los Angeles" style="width:100%;">
+      </div>
+      <div class="item">
+        <img src="{% static "images/carouselfoto1.jpg" %}" alt="Restaurant" style="width:100%;">
+      </div>
+      <div class="item">
+        <img src="{% static "images/carouselfoto2.jpg" %}" alt="New york" style="width:100%;">
+      </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+<div class="container">
+    <h2 style="text-align:center; color: white;">About Us</h2>
+    <div class="row">
+            <div class="col-md-6" id="staffimg" style="color: white;">
+                <img src="{% static "images/Staff.jpg" %}" alt="My image" style="width: 100%">
+            </div>
+            <div class="col-md-6" style="color: white">
+                <h3>Restaurant Staff Positions and Responsibilities</h3>
+            <p>
+             Food preparation staff are staff that usually stay in the kitchen and prepare and cook the food.
+                They might occasionally come out into the public restaurant if a customer has asked to see the chef,
+                this could be to compliment the food or complain about a problem with the food.
+                The drinks preparation and service staff are those staff that take orders from the guests and/or carry those orders to the table e.g.
+                waiters/waitresses and bartenders. Alcoholic Drinks are usually prepared behind a drinks bar in the restaurant,
+                while non alcoholic drinks, e.g. coffee and tea, are prepared in the kitchen in a special department called the Stillroom.
+            </p>
+            </div>
+    </div>
+        <div class="row">
+            <div class="col-md-6" id="staffimg" style="color: white;">
+                <h3>Online Ordering</h3>
+            <p>
+                The ability to instantly order from your online menu provides easy access for your customers.
+                It allows them to conveniently browse and then order from your menu.
+                Oftentimes they’ll spend more money ordering online as they’ll be tempted to try more.
+                You can use prominent calls to action to encourage a larger order.
+                Don’t forget the mobile-friendly responsive website. If your customer can’t order online with ease on their mobile phone,
+                it’s time for a new website.
+            </p>
+
+            </div>
+            <div class="col-md-6" style="color: white">
+                <img src="{% static "images/onlineorder.jpg" %}" alt="My image" style="width: 100%">
+            </div>
+    </div>
+        <div class="row">
+            <div class="col-md-6" id="staffimg" style="color: white;">
+                <img src="{% static "images/foodquality.jpg" %}" alt="My image" style="width: 100%">
+            </div>
+            <div class="col-md-6" style="color: white">
+                <h3>Food Quality</h3>
+            <p>
+                Food quality is the quality characteristics of food that is acceptable to consumers.
+                This includes external factors as appearance, texture, and flavour; factors such as federal grade standards and internal.
+                Members of the public complain to trading standards professionals, who submit complaint samples and also samples used to routinely monitor the food marketplace to public analysts.
+                Public analysts carry out scientific analysis on the samples to determine whether the quality is of sufficient standard.
+                Food quality is an important food manufacturing requirement, because food consumers are susceptible to any form of contamination that may occur during the manufacturing process.
+                Many consumers also rely on manufacturing and processing standards, particularly to know what ingredients are present, due to dietary, nutritional requirements, or medical conditions.
+                Besides ingredient quality, there are also sanitation requirements.
+                It is important to ensure that the food processing environment is as clean as possible in order to produce the safest possible food for the consumer.
+            </p>
+            </div>
+    </div>
+</div>
+<footer style="margin-top: 10px">
+    <div class="container">
+        <div class="col-md-3 col-sm-12" style="padding-left: 10px">
+            <h4>Contact</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-map-marker"></i>Rruga: Siri Kodra, Qytet Studenti,Tirane
+                </li>
+                <li>
+                    <a href="tel:+355694812891"><i class="fa fa-phone"></i>+355694812891</a>
+                </li>
+                <li>
+                    <a href="https://mail.google.com/mail/u/0/#inbox"><i class="fa fa-envelope"></i>parisszarka@gmail.com</a>
+                </li>
+                <li>
+                    <i class="fa fa-clock-o"></i>E hene - E diele, 09:00-21:00
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <h4>About</h4>
+            <a href="About.html">About Us</a>
+            <h4>Try our services</h4>
+            <a href="register.html">Register</a><br>
+            <a href="login.html">Login</a>
+
+        </div>
+        <div class="col-md-6 col-sm-12" style="text-align: center">
+            <div id="word_spaces">
+                <p>
+                    <a href="https://www.facebook.com/">
+                    <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                    <a href="https://twitter.com/">
+                    <i class="fab fa-twitter-square fa-2x"></i>
+                    </a>
+                    <a href="https://plus.google.com/">
+                    <i class="fab fa-google-plus-square fa-2x"></i>
+                    </a>
+                    <a href="https://www.skype.com/en/">
+                    <i class="fab fa-skype fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+                <br>
+                <p>By using our site you agree to our Terms of Use. Read owr Privacy Policy. &copy;2019 Porositi.com, LLC. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

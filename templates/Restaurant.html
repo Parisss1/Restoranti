@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restaurant</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link href="{% static "style/style.css" %}" rel="stylesheet">
+</head>
+<body>
+<header style="background-image: url('../static/images/image.jpg'); height: 470px">
+    <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active">
+            <a href='/restaurant/'>Home</a>
+        </li>
+        <li>
+            <a href='/browse/'>Browse</a>
+        </li>
+          {% if request.user.is_authenticated %}
+              <li>
+                  <a href='/cart/'>Cart</a>
+              </li>
+          {% endif %}
+                <li>
+                  <a href='/about/'>About Us</a>
+              </li>
+            <li>
+           <form method="post" action='/srch/' style="padding: 11px">
+                {% csrf_token %}
+                <input type="text" name="text1" placeholder="Search..." style="width: 220px">
+                <button type="submit"><i class="fa fa-search"></i></button>
+	    </form>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+        <li><a href='/log/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          {% else %}
+          <li><a href='/login/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+            <li><a href='/register/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+          {% endif  %}
+      </ul>
+    </div>
+</div>
+<h1 id="h1">Welcome to our restaurant !</h1>
+</header>
+<div class="container">
+<div style="text-align:center; padding-top:40px" class="col-xs-12 col-sm-12">
+<a class="btn btn-lg btn-warning delivery_points" href='#'>
+<i class="fa fa-trophy pull-left" style="padding-right:10px;"></i>
+<p>Delivery Points</p>
+</a>
+</div>
+
+<div class="row" style="padding-top:40px">
+	<div class="col-xs-12 col-sm-12 col-md-4 services">
+		<i class="fa fa-mobile-alt fa-4x"></i><br>		
+		<h5>Easy Ordering</h5>
+		I'ts quick, convenient and free to use on any device.
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 services">
+		<i class="fa fa-male fa-4x"></i><br>
+		<h5>More Choices</h5>
+		Everything you want, including wine and liquor, in one place.
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 services">           
+		<i class="fa fa-trophy fa-4x"></i><br>
+		<h5>Earn Rewards</h5>
+		Score Deiver Points with every purchuase and earn great rewards.
+	</div>
+</div>
+
+	<h3 style="text-align: center;">Browse by Cuisine</h3>
+
+<div class="container row products">
+<div class="img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/pizza.jpg" %}" alt="My image">
+		<div class="text_inside_img">Pizza</div>			
+	</a>
+</div>
+<div class="img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/tacos.jpg" %}" alt="My image">
+		<div class="text_inside_img">Mexican</div>
+	</a>
+</div>
+<div class="img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/vegetarianfood.jpg" %}" alt="My image">
+		<div class="text_inside_img">Vegetarian</div>
+	</a>
+</div>
+</div>
+<div class="container row products">
+<div class="img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/chinese.jpg" %}" alt="My image">
+		<div class="text_inside_img">Chinese</div>
+	</a>
+</div>
+<div class="img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/fastfood.jpg" %}" alt="My image">
+		<div class="text_inside_img">Fast ood</div>
+	</a>
+</div>
+<div class=" img col-xs-12 col-sm-12 col-md-4">
+	<a href="#" class="hover">
+		<img src="{% static "images/italianfood.jpg" %}" alt="My image">
+		<div class="text_inside_img">Italian</div>
+	</a>
+</div>
+</div>
+</div>
+<footer>
+    <div class="container">
+        <div class="col-md-3 col-sm-12" style="padding-left: 10px">
+            <h4>Contact</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-map-marker"></i>Rruga: Siri Kodra, Qytet Studenti,Tirane
+                </li>
+                <li>
+                    <a href="tel:+355694812891"><i class="fa fa-phone"></i>+355694812891</a>
+                </li>
+                <li>
+                    <a href="https://mail.google.com/mail/u/0/#inbox"><i class="fa fa-envelope"></i>parisszarka@gmail.com</a>
+                </li>
+                <li>
+                    <i class="fa fa-clock-o"></i>E hene - E diele, 09:00-21:00
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <h4>About</h4>
+            <a href='/about/'>About Us</a>
+            <h4>Try our services</h4>
+            <a href='/register/'>Register</a><br>
+            <a href='/login/'>Login</a>
+        </div>
+        <div class="col-md-6 col-sm-12" style="text-align: center">
+            <div id="word_spaces">
+                <p>
+                    <a href="https://www.facebook.com/">
+                    <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                    <a href="https://twitter.com/">
+                    <i class="fab fa-twitter-square fa-2x"></i>
+                    </a>
+                    <a href="https://plus.google.com/">
+                    <i class="fab fa-google-plus-square fa-2x"></i>
+                    </a>
+                    <a href="https://www.skype.com/en/">
+                    <i class="fab fa-skype fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+                <br>
+                <p>By using our site you agree to our Terms of Use. Read owr Privacy Policy. &copy;2019 Porositi.com, LLC. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

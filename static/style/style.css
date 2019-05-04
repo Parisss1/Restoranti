@@ -1,0 +1,149 @@
+/*The header*/
+header{
+	background-repeat:no-repeat; 
+	background-size: 100% 100%;
+}
+
+header img {
+  max-width: 100%;
+  height: auto;
+}
+
+ #h1 {
+	font-size: 36px; 
+	padding: 26px; 
+	color: white; 
+	text-shadow: 2px 2px 4px #000;
+	text-align: center;
+}
+
+/*The Search*/
+#search{
+	padding-top: 100px; 
+	padding-bottom: 60px;
+}
+#search form {
+	text-align: center;
+}
+#search form input {
+	height:35px; 
+	width:180px;
+}
+#search form button {
+	width:180px;
+}
+/*The Orange Button*/
+.delivery_points{
+	padding-left:20px; 
+	height:42px; 
+	width:200px;
+}
+
+/*The Huge fa icons*/
+.services{
+	text-align:center; 
+	padding:20px;
+}
+
+/*Products*/
+.img{
+	padding: 10px;
+}
+.img img{
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+	width: 100%;
+	height: 100%;
+}
+.text_inside_img{
+	position: absolute;
+  	bottom: 12px;
+  	left: 16px;
+  	color: white;
+	text-shadow: 2px 2px 4px #000000;
+}
+.hover:hover{
+	opacity: 0.5;
+}
+.kategorite {
+	width: 100%;
+}
+
+/*The Footer*/
+footer {
+	padding-top: 50px;
+	margin-top: auto;
+	background-color: lightgrey;
+    height:auto;
+}
+#word_spaces {
+	word-spacing: 30px;
+}
+
+#cart_table{
+    margin-bottom: 22px;
+    margin-top: 37px;
+}
+
+#totali{
+	margin: 0;
+	bottom: 0;
+	right: 15px;
+	position: absolute;
+}
+
+#checkout {
+	right: 15px;
+	position: absolute;
+	top: 5px;
+	padding: 0;
+}
+ #buy_button {
+	 padding: 4px 7px;
+	 font-size: 12px;
+	 line-height: 1.5;
+	 border-radius: 3px;
+ }
+/*product card*/
+.card > a {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #3aad3a;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+.example-1 {
+position: relative;
+overflow-y: auto;
+height: 100px;
+}
+
+/*comment section*/
+
+/*textareasize*/
+#textarea {
+    resize:none;
+}
+
+#comment_box {
+	padding: 10px;
+}
+
+#comment_section > div {
+	padding-left: 4px;
+}
+
+.navbar-default {
+    background-color: #cecece;
+    border-color: #cecece;
+}

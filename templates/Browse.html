@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link href="{% static "style/style.css" %}" rel="stylesheet">
+	<title>Browse</title>
+</head>
+<body style="background-color: darkslategrey">
+<header>
+    <nav class="navbar navbar-default justify-content-between">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li>
+            <a href='/restaurant/'>Home</a>
+        </li>
+        <li class="active">
+            <a href='/browse/'>Browse</a>
+        </li>
+          {% if request.user.is_authenticated %}
+              <li>
+                  <a href='/cart/'>Cart</a>
+              </li>
+          {% endif %}
+                <li>
+                  <a href='/about/'>About Us</a>
+              </li>
+      <li>
+           <form method="post" action='/srch/' style="padding: 11px">
+                {% csrf_token %}
+                <input type="text" name="text1" placeholder="Search..." style="width: 220px">
+                <button type="submit"><i class="fa fa-search"></i></button>
+	    </form>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+        <li><a href='/log/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          {% else %}
+          <li><a href='/login/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+            <li><a href='/register/' data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+          {% endif  %}
+      </ul>
+    </div>
+</nav>
+</header>
+<h1 style="text-align: center; color: white">Browse our products</h1>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            {% for k in kategorite %}
+                <p>
+                    <a type="button" href="/filter/?kat={{ k.id }}" class="btn btn-ge style-4 btn-default btn-lg kategorite">{{ k.emri }}</a>
+                </p>
+            {% endfor %}
+        </div>
+        <div class="col-md-10 col-sm-12" >
+        {% for p in products %}
+            <div class="col-md-3 col-sm-12 col-xs-12 on-over card" style="background-color: lightgray; margin: 2px;">
+                <img class="img-over" style="padding-top:10px; width:100%; height:100%;" src="{{ p.foto }}">
+                <label class="label-ge">{{ p.emri }}</label>
+                <p style="margin: 0 0 0px"><label style="color: #4CAF50; font-size: 24px;">{{ p.cmimi }} LEK</label></p>
+                <div class="row" style="background-color: lightgray; margin-right: 0px; margin-left: 0px;">
+                  <div>
+                    <div class="card example-1 scrollbar-ripe-malinka">
+                      <div class="card-body" style="padding: 4px">
+                        <h4 id="section1"><strong>Pershkrimi</strong></h4>
+                        <p>{{ p.pershkrimi }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a type="button" href="/addtocart?id={{ p.id }}" class="btn btn-ge style-4 btn-info btn-md" style="margin: 3px">Add to Cart</a>
+            </div>
+        {% endfor %}
+{#        Pagination#}
+            <div class="pagination col-md-10">
+                    {% if products.has_other_pages %}
+                        <ul class="pagination">
+                        {% if products.has_previous %}
+                            <li>
+                                <a href=?page"={{ products.previous_page_number }}>&laquo;</a>
+                            </li>
+                        {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                        {% endif %}
+                    {% for i in products.paginator.page_range %}
+                        {% if products.number == i %}
+                             <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                            {% else %}
+                             <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                        <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                        </ul>
+            </div>
+{#        Search results#}
+        {% for k in kerkimi %}
+            <div class="col-md-3 col-sm-12 col-xs-12 on-over card" style="background-color: lightgray; margin: 2px">
+                <img class="img-over" style="padding-top:10px; width:100%; height:100%;" src="{{ k.foto }}">
+                <label class="label-ge">{{ k.emri }}</label>
+                <p style="margin: 0 0 0px"><label style="color: #4CAF50; font-size: 24px;">{{ k.cmimi }} LEK</label></p>
+                <div class="row" style="background-color: lightgray; margin-right: 0px; margin-left: 0px;">
+                  <div>
+                    <div class="card example-1 scrollbar-ripe-malinka">
+                      <div class="card-body" style="padding: 4px">
+                        <h4 id="section1"><strong>Pershkrimi</strong></h4>
+                        <p>{{ k.pershkrimi }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a type="button" href="/addtocart?id={{ k.id }}" class="btn btn-ge style-4 btn-info btn-md" style="margin: 3px">Add to Cart</a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+  </div>
+<footer>
+    <div class="container">
+        <div class="col-md-4 col-sm-12" style="padding-left: 10px">
+            <h4>Contact</h4>
+            <ul>
+                <li>
+                    <i class="fa fa-map-marker"></i>Rruga: Siri Kodra, Qytet Studenti,Tirane
+                </li>
+                <li>
+                    <a href="tel:+355694812891"><i class="fa fa-phone"></i>+355694812891</a>
+                </li>
+                <li>
+                    <a href="https://mail.google.com/mail/u/0/#inbox"><i class="fa fa-envelope"></i>parisszarka@gmail.com</a>
+                </li>
+                <li>
+                    <i class="fa fa-clock-o"></i>E hene - E diele, 09:00-21:00
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 col-sm-12" style="text-align: center">
+            <div id="word_spaces">
+                <p>
+                    <a href="https://www.facebook.com/">
+                    <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                    <a href="https://twitter.com/">
+                    <i class="fab fa-twitter-square fa-2x"></i>
+                    </a>
+                    <a href="https://plus.google.com/">
+                    <i class="fab fa-google-plus-square fa-2x"></i>
+                    </a>
+                    <a href="https://www.skype.com/en/">
+                    <i class="fab fa-skype fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+                <br>
+                <p>By using our site you agree to our Terms of Use. Read owr Privacy Policy. &copy;2019 Porositi.com, LLC. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
